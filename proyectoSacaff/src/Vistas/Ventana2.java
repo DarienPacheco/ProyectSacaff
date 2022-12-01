@@ -16,6 +16,7 @@ public class Ventana2 extends javax.swing.JFrame {
      */
     public Ventana2() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -44,8 +45,18 @@ public class Ventana2 extends javax.swing.JFrame {
         jLabel3.setText("Contraseña");
 
         jButton1.setText("Entrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         contraseñaIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +120,18 @@ public class Ventana2 extends javax.swing.JFrame {
     private void contraseñaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaInActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_contraseñaInActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Ventana1 a = new Ventana1();
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InterfazUsuario b = new InterfazUsuario();
+        b.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

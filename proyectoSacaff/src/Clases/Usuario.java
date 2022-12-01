@@ -13,6 +13,10 @@ public class Usuario {
         this.correoUsuario = correoUsuario;
     }
 
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); // 
+    }
+
     public String getNombreUsuario() {
         return nombreUsuario;
     }
