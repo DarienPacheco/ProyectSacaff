@@ -4,7 +4,7 @@
  */
 package Clases;
 import Datos.CanchasDeportivas;
-import Clases.*;
+
 
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
  *
  * @author Vichosty
  */
+
+//intento de conectarme al mysql 
+//todavía no se como
 public class fCanchasDeportivas {
     @SuppressWarnings("FieldMayBeFinal")
     private Conexion mysql = new Conexion();
@@ -54,13 +57,13 @@ public DefaultTableModel mostrar (String buscar){
 }
 
     public boolean insertar(CanchasDeportivas dts){
-        sSql = "insert into canchas(idCancha,nombreCancha,tipoCancha,costoPorHora)" + "values (?,?,?,?)";
+        sSql = "insert into canchas(nombreCancha,tipoCancha,costoPorHora)" + "values (?,?,?)";
         try {
             PreparedStatement pst=cn.prepareStatement(sSql);
-            pst.setInt(1,dts.getIdCancha());
-            pst.setString(2,dts.getNombreCancha());
-            pst.setString(3,dts.getTipoCancha());
-            pst.setInt(4,dts.getCostoPorHora());
+
+            pst.setString(1,dts.getNombreCancha());
+            pst.setString(2,dts.getTipoCancha());
+            pst.setInt(3,dts.getCostoPorHora());
             
             int n=pst.executeUpdate();
             if (n!= 0){
@@ -79,27 +82,58 @@ public DefaultTableModel mostrar (String buscar){
         
     }
     
-    /*public boolean editar(CanchasDeportivas dts){
+    public boolean editar(CanchasDeportivas dts){
+        sSql ="update canchas set nombreCancha=?,tipoCancha=?,costoPorHora=? where idCancha=?";
         try {
-            
+            PreparedStatement pst=cn.prepareStatement(sSql);
+
+            pst.setString(1,dts.getNombreCancha());
+            pst.setString(2,dts.getTipoCancha());
+            pst.setInt(3,dts.getCostoPorHora());
+            pst.setInt(4,dts.getIdCancha());
+            int n=pst.executeUpdate();
+            if (n!= 0){
+                
+                return true; 
+            }
+            else {
+                return false;
+            }
             
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+            return false;
         }
+    }  
     
-        
-    }
+    
     
     public boolean eliminar(CanchasDeportivas dts){
+        sSql="delete from cancha where idCancha=?";    
+        
+        
         try {
-            
+            PreparedStatement pst=cn.prepareStatement(sSql);
+
+            pst.setString(1,dts.getNombreCancha());
+            pst.setString(2,dts.getTipoCancha());
+            pst.setInt(3,dts.getCostoPorHora());
+            pst.setInt(4,dts.getIdCancha());
+            int n=pst.executeUpdate();
+            if (n!= 0){
+                
+                return true; 
+            }
+            else {
+                return false;
+            }
             
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(null, e);
+            return false;
         }
-    
-        
     }
-*/
+
+
 }
 
