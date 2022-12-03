@@ -5,15 +5,25 @@ import Clases.hash;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import Clases.*;
 import javax.swing.JOptionPane;
-public class Ventana3 extends javax.swing.JFrame {
 
+
+public class Ventana3 extends javax.swing.JFrame {
+    Conexion conectar = null;
    
-    public Ventana3() {
+    public Ventana3(Conexion conectar) {
         initComponents();
         this.setLocationRelativeTo(null);
+        //Conexion conectar1 = conectar;
+        this.conectar = conectar;
     }
+
+    private Ventana3() {
+        initComponents();
+    }
+
+   
 
   
     @SuppressWarnings("unchecked")
@@ -123,8 +133,10 @@ public class Ventana3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        SqlUsuarios modSql = new SqlUsuarios();
-        Usuario mod = new Usuario();
+        BDD modSql;
+        try {
+            modSql = new BDD(conectar);
+            Usuario mod = new Usuario();
         
         String pass = new String(jPasswordField1.getPassword());
         String passconf = new String(jPasswordField2.getPassword());
@@ -136,19 +148,14 @@ public class Ventana3 extends javax.swing.JFrame {
             mod.setContraseñaUsuario(nuevoPass);
             mod.setCorreoUsuario(jTextField1.getText());
             
-            try {
-                if(modSql.registrar(mod)){
-                    JOptionPane.showMessageDialog(null, "Registro completo");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Error al registrar");
-                }
-                    
-            } catch (SQLException ex) {
-                Logger.getLogger(Ventana3.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            modSql.registrar(mod.getNombreUsuario(), mod.getContraseñaUsuario(), mod.getCorreoUsuario());
         }else{
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
         }
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventana3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

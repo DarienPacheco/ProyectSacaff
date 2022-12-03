@@ -4,6 +4,7 @@
  */
 package Clases;
 import Datos.CanchasDeportivas;
+import Clases.*;
 
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class fCanchasDeportivas {
     @SuppressWarnings("FieldMayBeFinal")
-    private Conexion mysql=new Conexion();
+    private Conexion mysql = new Conexion();
     @SuppressWarnings("FieldMayBeFinal")
     private Connection cn=mysql.conectar();
     private String sSql="";

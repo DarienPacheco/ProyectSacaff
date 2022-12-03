@@ -11,7 +11,7 @@ public class SqlUsuarios extends Conexion {
     public boolean registrar(Usuario usr) throws SQLException{
         
         PreparedStatement ps = null;
-        Connection con = getConexion();
+        Connection con = getConnection();
         
         String sql = "INSERT INTO Usuarios (nombreUsuario,contraseñaUsuario,correoUsuario) VALUES(?,?,?)";
         try {
