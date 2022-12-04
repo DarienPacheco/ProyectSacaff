@@ -4,6 +4,11 @@
  */
 package Vistas;
 
+import Clases.fCanchasDeportivas;
+import Datos.CanchasDeportivas;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vichosty
@@ -15,32 +20,56 @@ public class ListaCanchas extends javax.swing.JFrame {
      */
     public ListaCanchas() {
         initComponents();
+        mostrar("");
+        inhabilitar();
     }
-    
+
     private String accion = "guardar";
-    void inhabilitar (){
-        AgregarBoton.setEnabled(false);
+    
+    void inhabilitar() {
+        TexIdCancha.setVisible(false);
+        //AgregarBoton.setEnabled(false);
         BuscarCampo.setEnabled(false);
-        EditarBoton.setEnabled(false);
         EliminarBoton.setEnabled(false);
-        TablaCanchas.setEnabled(false);
+        //TablaCanchas.setEnabled(false);
         VolverBoton.setEnabled(false);
-        
-    
+        GuardarBoton.setEnabled(false);
+        tipoCanchaBox.setEnabled(false);
+        NombreCanchaPanel.setEnabled(false);
+        costoHoraPanel.setEnabled(false);
+        NombreCanchaPanel.setText("");
+        costoHoraPanel.setText("");
+
     }
-    
-    void habilitar (){
+
+    void habilitar() {
+        TexIdCancha.setVisible(false);
         AgregarBoton.setEnabled(true);
         BuscarCampo.setEnabled(true);
-        EditarBoton.setEnabled(true);
         EliminarBoton.setEnabled(true);
         TablaCanchas.setEnabled(true);
         VolverBoton.setEnabled(true);
-        
-    
+        GuardarBoton.setEnabled(true);
+        tipoCanchaBox.setEnabled(true);
+        NombreCanchaPanel.setEnabled(true);
+        costoHoraPanel.setEnabled(true);
+        NombreCanchaPanel.setText("");
+        costoHoraPanel.setText("");
     }
-    
-    
+
+    void mostrar(String buscar) {
+        try {
+            DefaultTableModel modelo;
+            fCanchasDeportivas func = new fCanchasDeportivas();
+            modelo = func.mostrar(buscar);
+            TablaCanchas.setModel(modelo);
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,30 +79,24 @@ public class ListaCanchas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaCanchas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         BuscarCampo = new javax.swing.JTextField();
         AgregarBoton = new javax.swing.JButton();
         EliminarBoton = new javax.swing.JButton();
-        EditarBoton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         VolverBoton = new javax.swing.JButton();
+        GuardarBoton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        tipoCanchaBox = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TablaCanchas = new javax.swing.JTable();
+        TexIdCancha = new javax.swing.JTextField();
+        NombreCanchaPanel = new javax.swing.JTextField();
+        costoHoraPanel = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        TablaCanchas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre Cancha", "Tipo", "Precio por hora"
-            }
-        ));
-        jScrollPane1.setViewportView(TablaCanchas);
 
         jLabel1.setText("Lista de canchas deportivas");
 
@@ -83,7 +106,7 @@ public class ListaCanchas extends javax.swing.JFrame {
             }
         });
 
-        AgregarBoton.setText("Agregar");
+        AgregarBoton.setText("Nuevo");
         AgregarBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarBotonActionPerformed(evt);
@@ -97,19 +120,86 @@ public class ListaCanchas extends javax.swing.JFrame {
             }
         });
 
-        EditarBoton.setText("Editar");
-        EditarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarBotonActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Buscar");
 
-        VolverBoton.setText("Volver");
+        VolverBoton.setText("Volver al inicio");
         VolverBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolverBotonActionPerformed(evt);
+            }
+        });
+
+        GuardarBoton.setText("Guardar");
+        GuardarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarBotonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Tipo de cancha");
+
+        tipoCanchaBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Futból", "Tenis" }));
+        tipoCanchaBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoCanchaBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Nombre cancha");
+
+        jLabel5.setText("Costo por hora");
+
+        TablaCanchas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Tipo", "Valor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaCanchas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaCanchasMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(TablaCanchas);
+        if (TablaCanchas.getColumnModel().getColumnCount() > 0) {
+            TablaCanchas.getColumnModel().getColumn(0).setPreferredWidth(1);
+        }
+
+        TexIdCancha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TexIdCanchaActionPerformed(evt);
+            }
+        });
+
+        NombreCanchaPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreCanchaPanelActionPerformed(evt);
+            }
+        });
+
+        costoHoraPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                costoHoraPanelActionPerformed(evt);
             }
         });
 
@@ -118,75 +208,208 @@ public class ListaCanchas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane1)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VolverBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(14, 14, 14)
-                            .addComponent(AgregarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(EditarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(EliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(BuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NombreCanchaPanel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(tipoCanchaBox, 0, 219, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(costoHoraPanel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(AgregarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(GuardarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(EliminarBoton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TexIdCancha, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(516, 516, 516)
+                                .addComponent(VolverBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(VolverBoton))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(1, 1, 1)
-                .addComponent(BuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EliminarBoton)
-                    .addComponent(AgregarBoton)
-                    .addComponent(EditarBoton))
-                .addGap(18, 18, 18))
+                    .addComponent(VolverBoton)
+                    .addComponent(jLabel1))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NombreCanchaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(costoHoraPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tipoCanchaBox, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AgregarBoton)
+                            .addComponent(GuardarBoton))
+                        .addGap(18, 18, 18)
+                        .addComponent(EliminarBoton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TexIdCancha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BuscarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCampoActionPerformed
-        // TODO add your handling code here:
+        mostrar(BuscarCampo.getText());
     }//GEN-LAST:event_BuscarCampoActionPerformed
 
     private void AgregarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBotonActionPerformed
-        // TODO add your handling code here:
+        habilitar();
+        GuardarBoton.setText("Guardar");
+        accion = "guardar";
+
+
     }//GEN-LAST:event_AgregarBotonActionPerformed
 
     private void EliminarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBotonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarBotonActionPerformed
+    
+        if  (!TexIdCancha.getText().equals("")){
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane,"¿Esta seguro que desea eliminar esta cancha?","Confirmar",2);
+            
+            if (confirmacion==0) {
+                fCanchasDeportivas func = new fCanchasDeportivas();
+                CanchasDeportivas dts = new CanchasDeportivas();
+                
+                dts.setIdCancha(Integer.parseInt(TexIdCancha.getText()));
+                func.eliminar(dts);
+                mostrar("");
+                inhabilitar();
+            
+            }
+        
+        
+        }
 
-    private void EditarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarBotonActionPerformed
-       this.inhabilitar();
-        editorCanchas newFrame = new editorCanchas();
-        newFrame.setVisible(true);
-        
-        
-       
-    }//GEN-LAST:event_EditarBotonActionPerformed
+
+
+
+
+    }//GEN-LAST:event_EliminarBotonActionPerformed
 
     private void VolverBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverBotonActionPerformed
         InterfazUsuario newFrame = new InterfazUsuario();
         newFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverBotonActionPerformed
+
+    private void GuardarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarBotonActionPerformed
+        if (NombreCanchaPanel.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un nombre para la cancha");
+            NombreCanchaPanel.requestFocus();
+            return;
+        }
+        if (costoHoraPanel.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "La cancha requiere un precio");
+            costoHoraPanel.requestFocus();
+            return;
+        }
+
+        CanchasDeportivas dts = new CanchasDeportivas();
+        fCanchasDeportivas func = new fCanchasDeportivas();
+
+        dts.setNombreCancha(NombreCanchaPanel.getText());
+        int seleccionado = tipoCanchaBox.getSelectedIndex();
+
+        if ("1".equals((String) tipoCanchaBox.getItemAt(seleccionado))) {
+            dts.setTipoCancha("Futbol");
+        } else {
+            dts.setTipoCancha("Tenis");
+        }
+        dts.setCostoPorHora(Double.parseDouble(costoHoraPanel.getText()));
+        
+        if (accion.equals("guardar")){
+            if (func.insertar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "La Cancha fue registrada correctamente");
+                mostrar("");
+                inhabilitar();
+            }
+        
+        }else if (accion.equals("editar")){
+            dts.setIdCancha(Integer.parseInt(TexIdCancha.getText()));
+            
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "La Cancha fue registrada correctamente");
+                mostrar("");
+                inhabilitar();
+            }
+        } 
+        
+        
+        
+
+    }//GEN-LAST:event_GuardarBotonActionPerformed
+
+    private void tipoCanchaBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCanchaBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoCanchaBoxActionPerformed
+
+    private void TexIdCanchaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TexIdCanchaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TexIdCanchaActionPerformed
+
+    private void NombreCanchaPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreCanchaPanelActionPerformed
+        NombreCanchaPanel.transferFocus();
+    }//GEN-LAST:event_NombreCanchaPanelActionPerformed
+
+    private void costoHoraPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoHoraPanelActionPerformed
+        costoHoraPanel.transferFocus();
+    }//GEN-LAST:event_costoHoraPanelActionPerformed
+
+    private void TablaCanchasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaCanchasMouseClicked
+        GuardarBoton.setText("Editar");
+        habilitar();
+        EliminarBoton.setEnabled(true);
+        accion="editar";
+        
+        int fila = TablaCanchas.rowAtPoint(evt.getPoint());
+        TexIdCancha.setText(TablaCanchas.getValueAt(fila, 0).toString());
+        NombreCanchaPanel.setText(TablaCanchas.getValueAt(fila, 1).toString());
+        tipoCanchaBox.setSelectedItem(TablaCanchas.getValueAt(fila, 2).toString());
+        costoHoraPanel.setText(TablaCanchas.getValueAt(fila, 3).toString());
+    }//GEN-LAST:event_TablaCanchasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -226,12 +449,19 @@ public class ListaCanchas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarBoton;
     private javax.swing.JTextField BuscarCampo;
-    private javax.swing.JButton EditarBoton;
     private javax.swing.JButton EliminarBoton;
+    private javax.swing.JButton GuardarBoton;
+    private javax.swing.JTextField NombreCanchaPanel;
     private javax.swing.JTable TablaCanchas;
+    private javax.swing.JTextField TexIdCancha;
     private javax.swing.JButton VolverBoton;
+    private javax.swing.JTextField costoHoraPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JComboBox<String> tipoCanchaBox;
     // End of variables declaration//GEN-END:variables
 }

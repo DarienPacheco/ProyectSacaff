@@ -24,13 +24,13 @@ public class CanchasDeportivas {
     private int idCancha;
     private String nombreCancha;
     private String tipoCancha;
-    private int costoPorHora;
+    private Double costoPorHora;
 
 
     public CanchasDeportivas() {
     }
 
-    public CanchasDeportivas(int idCancha, String nombreCancha, String tipoCancha, int costoPorHora, String estado) {
+    public CanchasDeportivas(int idCancha, String nombreCancha, String tipoCancha, Double costoPorHora, String estado) {
         this.idCancha = idCancha;
         this.nombreCancha = nombreCancha;
         this.tipoCancha = tipoCancha;
@@ -62,11 +62,11 @@ public class CanchasDeportivas {
         this.tipoCancha = tipoCancha;
     }
 
-    public int getCostoPorHora() {
+    public Double getCostoPorHora() {
         return costoPorHora;
     }
 
-    public void setCostoPorHora(int costoPorHora) {
+    public void setCostoPorHora(Double costoPorHora) {
         this.costoPorHora = costoPorHora;
     }
 

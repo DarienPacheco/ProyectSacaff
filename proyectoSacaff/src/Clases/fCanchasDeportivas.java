@@ -23,8 +23,7 @@ public class fCanchasDeportivas {
     
     private Connection cn=mysql.conectar();
     private String sSql="";
-    public Integer totalregistros;
-    
+  
 
 
 public DefaultTableModel mostrar (String buscar){
@@ -33,7 +32,6 @@ public DefaultTableModel mostrar (String buscar){
     
     String [] registro = new String[4];
 
-    totalregistros = 0;
     modelo = new DefaultTableModel(null,titulos);
     
     //seleccionar desde una tabla de nombre canchas en la base de datos
@@ -47,7 +45,6 @@ public DefaultTableModel mostrar (String buscar){
             registro [1] = rs.getString("nombreCancha");
             registro [2] = rs.getString("tipoCancha");
             registro [3] = rs.getString("costoPorHora");
-            totalregistros = totalregistros +1;
             modelo.addRow(registro);
         }
     }catch(SQLException e){
@@ -114,11 +111,7 @@ public DefaultTableModel mostrar (String buscar){
         
         try {
             PreparedStatement pst=cn.prepareStatement(sSql);
-
-            pst.setString(1,dts.getNombreCancha());
-            pst.setString(2,dts.getTipoCancha());
-            pst.setInt(3,dts.getCostoPorHora());
-            pst.setInt(4,dts.getIdCancha());
+            pst.setInt(1,dts.getIdCancha());
             int n=pst.executeUpdate();
             if (n!= 0){
                 
