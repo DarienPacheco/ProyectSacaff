@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
 //intento de conectarme al mysql 
 //todavía no se como
 public class fCanchasDeportivas {
-    @SuppressWarnings("FieldMayBeFinal")
+    
     private Conexion mysql = new Conexion();
-    @SuppressWarnings("FieldMayBeFinal")
+    
     private Connection cn=mysql.conectar();
     private String sSql="";
     public Integer totalregistros;
@@ -50,7 +50,7 @@ public DefaultTableModel mostrar (String buscar){
             totalregistros = totalregistros +1;
             modelo.addRow(registro);
         }
-    }catch(Exception e){
+    }catch(SQLException e){
         JOptionPane.showConfirmDialog(null, e);
     }
     return null;
@@ -74,7 +74,7 @@ public DefaultTableModel mostrar (String buscar){
             return false;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
@@ -100,7 +100,7 @@ public DefaultTableModel mostrar (String buscar){
                 return false;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }
@@ -128,7 +128,7 @@ public DefaultTableModel mostrar (String buscar){
                 return false;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }

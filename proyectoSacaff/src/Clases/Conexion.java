@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 
@@ -28,13 +29,6 @@ public class Conexion {
     
     public void disconnet () {
         con = null;
-    }
-    
+    }   
 }
-
-
-
-
-    
-        
-
+//falta integrar la base de datos con las canchas deportivas
